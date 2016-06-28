@@ -1,5 +1,6 @@
 package com.grandroid.android.geoquiz;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,10 +14,10 @@ public class QuizActivity extends AppCompatActivity {
 
     private static final String TAG = "QuizActivity";
     private static final String KEY_INDEX = "index";
-
     private Button mTrueButton;
     private Button mFalseButton;
     private Button mNextButton;
+    private Button mCheatButton;
     private TextView mQuestionTextView;
 
     private Question[] mQuestionBank = new Question[] {
@@ -25,7 +26,6 @@ public class QuizActivity extends AppCompatActivity {
             new Question(R.string.question_africa, false),
             new Question(R.string.question_americas, true),
             new Question(R.string.question_asia, true),
-
     };
 
     private int mCurrentIndex = 0;
@@ -81,6 +81,17 @@ public class QuizActivity extends AppCompatActivity {
             public void onClick(View v) {
                 mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
                 updateQuestion();
+            }
+        });
+
+        mCheatButton = (Button) findViewById(R.id.cheat_button);
+        mCheatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Start CheatActivity
+                Intent i = new Intent(QuizActivity.this, CheatActivity.class);
+                startActivity(i);
+
             }
         });
 
